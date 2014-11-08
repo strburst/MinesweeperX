@@ -1,8 +1,9 @@
 #MinesweeperX
 
 This project was created in July-August 2013 at Carleton College's
-[SCSI](http://apps.carleton.edu/summer/scsi/).  It evolves a Minesweeper solver
-with genetic programming.
+[SCSI](http://apps.carleton.edu/summer/scsi/) by me (Allen Zheng) and my lab
+partner (Anna Johnson). It evolves a Minesweeper solver with genetic
+programming.
 
 ##Compiling
 To compile this project, you need to sequentially compile the files in `acme`,
