@@ -2,6 +2,9 @@ package msx;
 
 import java.util.Scanner;
 
+/**
+ * Sets up a simple command-line game of Minesweeper.
+ */
 public class Minesweeper {
 
 	static Scanner in;

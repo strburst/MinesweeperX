@@ -2,13 +2,11 @@ package msx;
 
 import java.awt.Point;
 
-//import java.util.Arrays;
-
 /**
- * A Minesweeper grid.
- * 
+ * This class represents a Minesweeper grid.
+ *
  * @author johnsona3
- * 
+ *
  */
 public class MSGrid {
 	private MSCell[][] grid;
@@ -88,7 +86,7 @@ public class MSGrid {
 	}
 
 	public MSGrid(int wd, int ht, int numMines) {
-		// numMines = (wd*ht)/12; //One twelfth of cells will be mines.s
+		// numMines = (wd*ht)/12; //One twelfth of cells will be mines.
 		this.numMines = numMines;
 		grid = new MSCell[wd][ht];
 		for (int i = 0; i < wd; i++) {
@@ -101,7 +99,6 @@ public class MSGrid {
 			int a = (int) (Math.random() * grid.length);
 			int b = (int) (Math.random() * grid[0].length);
 			if (!grid[a][b].isMine()) {
-				// System.out.println("dfajiefa");
 				grid[a][b] = new MSCell(true);
 				i++;
 			}
@@ -116,9 +113,9 @@ public class MSGrid {
 
 	/*
 	 * public MSGrid(int wd, int ht) { MSGrid(wd, ht, 12) }
-	 * 
+	 *
 	 * public MSGrid(int wd, int ht, int numMines)
-	 * 
+	 *
 	 * public MSGrid(int wd, int ht, double ratio)
 	 */
 
@@ -174,7 +171,7 @@ public class MSGrid {
 
 	/**
 	 * Return the requested MSCell at point (row, col).
-	 * 
+	 *
 	 * @param row
 	 * @param col
 	 * @return
@@ -185,7 +182,7 @@ public class MSGrid {
 
 	/**
 	 * Return the width of the grid.
-	 * 
+	 *
 	 * @return The width of the grid.
 	 */
 	public int getWidth() {
@@ -194,7 +191,7 @@ public class MSGrid {
 
 	/**
 	 * Return the height of the grid.
-	 * 
+	 *
 	 * @return The height of the grid.
 	 */
 	public int getHeight() {
@@ -207,7 +204,7 @@ public class MSGrid {
 
 	/**
 	 * Returns whether the game is over.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isGameOver() {
@@ -216,7 +213,7 @@ public class MSGrid {
 
 	/**
 	 * Flags the specified cell.
-	 * 
+	 *
 	 * @param row
 	 * @param col
 	 */
@@ -230,21 +227,21 @@ public class MSGrid {
 
 	/**
 	 * Unflags the specified cell.
-	 * 
+	 *
 	 * @param row
 	 * @param col
 	 */
 	public void unflag(int row, int col) {
 		grid[row][col].setFlagged(false);
 	}
-	
+
 	public void endGame() {
 		gameOver = true;
 	}
 
 	/**
 	 * Check if the game has been won.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean checkWin() {
@@ -351,7 +348,7 @@ public class MSGrid {
 
 	/**
 	 * Get list of adjacent MSCells.
-	 * 
+	 *
 	 * @param row
 	 *            The row of the cell.
 	 * @param col
@@ -417,7 +414,7 @@ public class MSGrid {
 
 	/**
 	 * Return a list of Points that are adjacent to the given coordinates.
-	 * 
+	 *
 	 * @param row
 	 *            The row of the cell.
 	 * @param col
