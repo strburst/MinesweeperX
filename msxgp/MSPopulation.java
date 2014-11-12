@@ -2,9 +2,9 @@ package msxgp;
 
 import gpjpp.*;
 
-//extend GPPopulation to create ant trees
-//doesn't really need to be public, but is made so for consistency
-
+/**
+ * Represents a population of Minesweeper solvers.
+ */
 public class MSPopulation extends GPPopulation {
 
     //this constructor called when new populations are created

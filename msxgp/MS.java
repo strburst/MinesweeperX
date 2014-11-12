@@ -2,15 +2,17 @@ package msxgp;
 
 import gpjpp.*;
 
-//Artificial ant test
-class MS extends GPRun {
+/**
+ * This class is responsible for running a round of Mineweeper evolution.
+ */
+public class MS extends GPRun {
 
     //must override GPRun.createVariables to return ant-specific variables
-    protected GPVariables createVariables() { 
-        return new MSVariables(); 
+    protected GPVariables createVariables() {
+        return new MSVariables();
     }
 
-    //must override GPRun.createNodeSet to return 
+    //must override GPRun.createNodeSet to return
     //  initialized set of functions & terminals
     protected GPAdfNodeSet createNodeSet(GPVariables cfg) {
         GPAdfNodeSet adfNs = new GPAdfNodeSet();
@@ -19,7 +21,7 @@ class MS extends GPRun {
         adfNs.reserveSpace(1);
 
         //add an extra function for big tests like los altos
-        
+
         //Change this??
         boolean bigTest = (((MSVariables)cfg).WorldHorizontal > 32);
         GPNodeSet ns;
@@ -46,16 +48,16 @@ class MS extends GPRun {
         ns.putNode(new GPNode(MSIndiv.FIV, "fiv"));
         ns.putNode(new GPNode(MSIndiv.SIX, "six"));
         ns.putNode(new GPNode(MSIndiv.SEV, "sev"));
-        
+
         /*if (bigTest)
             ns.putNode(new GPNode(AntIndiv.PROG4, "prog4", 4));*/
 
         return adfNs;
     }
 
-    //must override GPRun.createPopulation to return 
+    //must override GPRun.createPopulation to return
     //  MS-specific population
-    protected GPPopulation createPopulation(GPVariables cfg, 
+    protected GPPopulation createPopulation(GPVariables cfg,
         GPAdfNodeSet adfNs) {
         return new MSPopulation(cfg, adfNs);
     }
@@ -66,7 +68,7 @@ class MS extends GPRun {
     //main application function
     public static void main(String[] args) {
 
-        //compute base file name from command line parameter
+        // Load the configuration file
         String baseName;
         if (args.length == 1)
             baseName = args[0];

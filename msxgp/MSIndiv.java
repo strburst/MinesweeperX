@@ -1,13 +1,11 @@
 package msxgp;
-//import java.io.*;
-//import java.awt.Point;
 
 import gpjpp.*;
 import msx.*;
 
-//keep track of an ant individual's state while evaluating fitness
-//not part of the GP hierarchy, but called upon in AntGP and AntGene
-
+/**
+ * This class keeps track of individual Minesweeper solvers.
+ */
 public final class MSIndiv {
 
     //functions and terminals
@@ -48,7 +46,7 @@ public final class MSIndiv {
     protected int stepCt = 0;
 
     protected MSGrid Grid;
-    
+
     //current position of ant
     protected int rowPos = 0;      //current position
     protected int colPos = 0;
@@ -59,7 +57,7 @@ public final class MSIndiv {
         worldHorizontal = worldH;
         worldVertical = worldV;
         numMines = numM;
-        
+
         Grid = new MSGrid(worldHorizontal, worldVertical, numMines);
         MSGrid printDemo = new MSGrid(Grid);
         printDemo.revealAll();
@@ -76,7 +74,7 @@ public final class MSIndiv {
         colPos = 0;
         stepCt = 0;
         //updateTrail();
-        
+
         /*MSGrid printDemo = new MSGrid(Grid);
         printDemo.revealAll();
         System.out.println();
@@ -106,7 +104,7 @@ public final class MSIndiv {
     		rowPos++;
     		colPos++;
     	}
-    	
+
     	if (rowPos < 0) {
     		rowPos = 0;
     	}

@@ -5,9 +5,10 @@ import java.io.*;
 import msx.MSGrid;
 import gpjpp.*;
 
-//extend GP for ant trees
-//class must be public for stream loading; otherwise non-public ok
-
+/**
+ * This class is responsible for executing trees of Minesweeper solver
+ * instructions.
+ */
 public class MSGP extends GP {
 
 	// public null constructor required during stream loading only

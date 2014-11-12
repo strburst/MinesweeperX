@@ -1,27 +1,12 @@
 package msxgp;
 
-// gpjpp example program
-// Copyright (c) 1997, Kim Kokkonen
-//
-// This program is free software; you can redistribute it and/or 
-// modify it under the terms of version 2 of the GNU General Public 
-// License as published by the Free Software Foundation.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-//
-// Send comments, suggestions, problems to kimk@turbopower.com
-
 import gpjpp.*;
 
-//extend GPGene to evaluate ants
-
+/**
+ * This class represents a Minesweeper solver. Every Minesweeper solver has a
+ * cursor which moves about the grid according to its instructions, and can
+ * also uncover or flag the cell underneath the cursor.
+ */
 public class MSGene extends GPGene {
 
 	// public null constructor required during stream loading only
@@ -53,44 +38,39 @@ public class MSGene extends GPGene {
 		return new MSGene(gpo);
 	}
 
-	// /TODO: Implement all nodes.
-	// called by AntGP.evaluate() for main branch of each GP
-	// returns food eaten by ant
-	// Java guarantees left-to-right evaluation order,
-	// hence progn expressions below
-	int evaluate(MSVariables cfg) {
+	public int evaluate(MSVariables cfg) {
 
 		cfg.ms.stepCt++;
 
 		switch (node.value()) {
 
 		case MSIndiv.MOV:
-			// "move" the focus
+			// move the cursor
 			cfg.ms.move(((MSGene) get(0)).evaluate(cfg));
 			return 0;
 
 		case MSIndiv.UNC:
-			// uncover the focus
+			// uncover cell at cursor
 			cfg.ms.Grid.reveal(cfg.ms.rowPos, cfg.ms.colPos);
 			return 0;
 
 		case MSIndiv.MRK:
-			// flag the focus
+			// flag cell at cursor
 			cfg.ms.Grid.flag(cfg.ms.rowPos, cfg.ms.colPos);
 			return 0;
 
 		case MSIndiv.UNMRK:
-			// unflag the focus
+			// unflag the cursor
 			cfg.ms.Grid.unflag(cfg.ms.rowPos, cfg.ms.colPos);
 			return 0;
 
 		case MSIndiv.NUM:
-			// return the number of mines at the focus
+			// return the number of mines around the cursor
 			cfg.ms.Grid.cell(cfg.ms.rowPos, cfg.ms.colPos).getAdjMines();
 			return 0;
 
 		case MSIndiv.IFCOV:
-			// if focus is covered, do first branch, else second branch
+			// if cursor is covered, do first branch, else second branch
 			if (!cfg.ms.Grid.cell(cfg.ms.rowPos, cfg.ms.colPos).isRevealed()) {
 				return ((MSGene) get(0)).evaluate(cfg);
 			} else {
