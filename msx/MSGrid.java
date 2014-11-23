@@ -46,6 +46,9 @@ public class MSGrid {
 		}
 	}
 
+	/**
+	 * Create a new MSGrid by copying an existing one.
+	 */
 	public MSGrid(MSGrid ms) {
 		grid = new MSCell[ms.getWidth()][ms.getHeight()];
 
@@ -59,32 +62,18 @@ public class MSGrid {
 		}
 	}
 
+	/**
+     * Create a new MSGrid with the given width and height, with 1/12 of the
+     * cells as mines.
+	 */
 	public MSGrid(int wd, int ht) {
-		numMines = (wd * ht) / 12; // One twelfth of cells will be mines.
-		grid = new MSCell[wd][ht];
-		for (int i = 0; i < wd; i++) {
-			for (int j = 0; j < ht; j++) {
-				grid[i][j] = new MSCell();
-			}
-		}
-
-		for (int i = 0; i < numMines;) {
-			int a = (int) (Math.random() * grid.length);
-			int b = (int) (Math.random() * grid[0].length);
-			if (!grid[a][b].isMine()) {
-				// System.out.println("dfajiefa");
-				grid[a][b] = new MSCell(true);
-				i++;
-			}
-		}
-
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
-				computeAdjacent(i, j);
-			}
-		}
+        this(wd, ht, 12);
 	}
 
+	/**
+     * Create a new MSGrid of the given width and height, with the given number
+     * of mines.
+	 */
 	public MSGrid(int wd, int ht, int numMines) {
 		// numMines = (wd*ht)/12; //One twelfth of cells will be mines.
 		this.numMines = numMines;
@@ -112,10 +101,6 @@ public class MSGrid {
 	}
 
 	/*
-	 * public MSGrid(int wd, int ht) { MSGrid(wd, ht, 12) }
-	 *
-	 * public MSGrid(int wd, int ht, int numMines)
-	 *
 	 * public MSGrid(int wd, int ht, double ratio)
 	 */
 
@@ -137,7 +122,6 @@ public class MSGrid {
 			gameOver = true;
 			return;
 		}
-		// Minesweeper.printGrid(this);
 
 		if (grid[row][col].getAdjMines() == 0) {
 			Point[] adjPt = getAdjacentCoord(row, col);
@@ -172,9 +156,9 @@ public class MSGrid {
 	/**
 	 * Return the requested MSCell at point (row, col).
 	 *
-	 * @param row
-	 * @param col
-	 * @return
+	 * @param row The row of the cell
+	 * @param col The col of the cell
+	 * @return The requested MSCell
 	 */
 	public MSCell cell(int row, int col) {
 		return grid[row][col];
