@@ -52,6 +52,8 @@ public class Minesweeper {
 				}
 			} catch (ArrayIndexOutOfBoundsException e) {
 				System.out.println("Bad coordinates. Try again.");
+			} catch (InputMismatchException e) {
+				System.out.println("Couldn't parse your input");
 			}
 		}
 
