@@ -5,7 +5,7 @@ import gpjpp.*;
 /**
  * This class is responsible for running a round of Mineweeper evolution.
  */
-public class MS extends GPRun {
+public class MSRun extends GPRun {
 
     //must override GPRun.createVariables to return ant-specific variables
     protected GPVariables createVariables() {
@@ -20,10 +20,7 @@ public class MS extends GPRun {
         //no ADFs used regardless of cfg setting
         adfNs.reserveSpace(1);
 
-        //add an extra function for big tests like los altos
-
-        //Change this??
-        boolean bigTest = (((MSVariables)cfg).WorldHorizontal > 32);
+        /* boolean bigTest = (((MSVariables)cfg).WorldHorizontal > 32); */
         GPNodeSet ns;
         /*if (bigTest)
             ns = new GPNodeSet(8);
@@ -68,12 +65,11 @@ public class MS extends GPRun {
     //main application function
     public static void main(String[] args) {
 
-        // Load the configuration file
-        String baseName;
+        String baseName; // Used to find config file, name output
         if (args.length == 1)
             baseName = args[0];
         else
-            baseName = "ms";
+            baseName = "default";
 
         //construct the test case
         MS test = new MS(baseName);
