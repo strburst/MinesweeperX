@@ -60,7 +60,7 @@ public class MSRun extends GPRun {
     }
 
     //construct this test case
-    MS(String baseName) { super(baseName, true); }
+    MSRun(String baseName) { super(baseName, true); }
 
     //main application function
     public static void main(String[] args) {
@@ -72,7 +72,7 @@ public class MSRun extends GPRun {
             baseName = "default";
 
         //construct the test case
-        MS test = new MS(baseName);
+        MSRun test = new MSRun(baseName);
 
         //run the test
         test.run();
