@@ -1,5 +1,10 @@
 *.class
 
+# Generated images/files
+*.gif
+*.stc
+default.ini
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
