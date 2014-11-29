@@ -57,7 +57,7 @@ public class MSGP extends GP {
 
 		double stdF = 0;
 
-		for (int i = 0; i < mcfg.TrialsPerProg; i++) {
+		for (int i = 0; i < mcfg.TrialsPerIndiv; i++) {
 			// prepare ms for moving
 			mcfg.ms.reset();
 			// System.out.println("JK");
@@ -96,7 +96,7 @@ public class MSGP extends GP {
 		// return standard fitness
 		// System.out.println("Fitness: "+stdF+" Count: "+
 		// mcfg.ms.stepCt+" length :" + length());
-		return stdF / mcfg.TrialsPerProg;
+		return stdF / mcfg.TrialsPerIndiv;
 	}
 
 	// optionally override GP.printOn to show ant-specific data

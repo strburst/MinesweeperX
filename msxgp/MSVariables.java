@@ -9,11 +9,10 @@ import gpjpp.*;
  */
 public class MSVariables extends GPVariables {
 
-	// number of cells in trail grid
-	public int WorldHorizontal = 10;
-	public int WorldVertical = 10;
-	public int NumMines = 8;
-	public int TrialsPerProg = 25;
+	public int WorldHorizontal = 10; // Width of minesweeper grids
+	public int WorldVertical = 10;   // Height of grids
+	public int NumMines = 8;         // Number of mines in a grid
+	public int TrialsPerIndiv = 25;  // Number of random grids test per solver
 
 	// file to read to get food trail
 	// public String TrailFile = "santafe.trl";
@@ -59,7 +58,7 @@ public class MSVariables extends GPVariables {
 		WorldHorizontal = getInt(props, "WorldHorizontal", WorldHorizontal);
 		WorldVertical = getInt(props, "WorldVertical", WorldVertical);
 		NumMines = getInt(props, "NumMines", WorldVertical);
-		TrialsPerProg = getInt(props, "NumMines", WorldVertical);
+		TrialsPerIndiv = getInt(props, "NumMines", WorldVertical);
 	}
 
 	// get values from a stream
@@ -70,7 +69,7 @@ public class MSVariables extends GPVariables {
 		WorldHorizontal = is.readInt();
 		WorldVertical = is.readInt();
 		NumMines = is.readInt();
-		TrialsPerProg = is.readInt();
+		TrialsPerIndiv = is.readInt();
 	}
 
 	// save values to a stream
@@ -79,7 +78,7 @@ public class MSVariables extends GPVariables {
 		os.writeInt(WorldHorizontal);
 		os.writeInt(WorldVertical);
 		os.writeInt(NumMines);
-		os.writeInt(TrialsPerProg);
+		os.writeInt(TrialsPerIndiv);
 		// os.writeUTF(TrailFile);
 	}
 
@@ -90,7 +89,7 @@ public class MSVariables extends GPVariables {
 		os.println("WorldHorizontal           = " + WorldHorizontal);
 		os.println("WorldVertical             = " + WorldVertical);
 		os.println("NumMines                  = " + NumMines);
-		os.println("TrialsPerProg             = " + NumMines);
+		os.println("TrialsPerIndiv            = " + NumMines);
 		// os.println("TrailFile                 = "+TrailFile);
 	}
 }
