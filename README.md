@@ -11,24 +11,21 @@ To compile this project, you need to sequentially compile the files in `acme`,
 includes the previously compiled files. It's easiest to simply sit in the
 project root and run:
 
-````
-javac acme/*.java
-javac gpjpp/*.java
-javac msx/*.java
-javac msxgp/*.java
-````
+```
+javac msxgp/GPRun.java
+```
 
 ##Running
 To run a simulation, run this in the project root:
-````
+```
 java msxgp.MSRun <config file>
-````
+```
 
 The config file is a standard ini file and controls things like the board size
 and the number of mines. If the config file is omitted, a default one is
 generated. A few example config files have been included.
 
 Alternatively, to play a nice game of Minesweeper in the console, run:
-````
+```
 java msx.Minesweeper
-````
+```
