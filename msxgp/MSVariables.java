@@ -17,7 +17,7 @@ public class MSVariables extends GPVariables {
 	// file to read to get food trail
 	// public String TrailFile = "santafe.trl";
 
-	// ms used to evaluate all trees, created in AntGP.evaluate()
+	// ms used to evaluate all trees, created in MSGP.evaluate()
 	public MSIndiv ms;
 
 	// public null constructor required for stream loading
@@ -25,14 +25,14 @@ public class MSVariables extends GPVariables {
 	}
 
 	// variables are never cloned in standard runs
-	// public AntVariables(AntVariables gpo) {
+	// public MSVariables(MSVariables gpo) {
 	// super(gpo);
 	// WorldHorizontal = gpo.WorldHorizontal;
 	// WorldVertical = gpo.WorldVertical;
 	// MaxEnergy = gpo.MaxEnergy;
 	// TrailFile = gpo.TrailFile;
 	// }
-	// protected Object clone() { return new AntVariables(this); }
+	// protected Object clone() { return new MSVariables(this); }
 
 	// ID routine required for streams
 	public byte isA() {
@@ -45,13 +45,12 @@ public class MSVariables extends GPVariables {
 		/*
 		 * try { ms = new MSIndiv(WorldHorizontal, WorldVertical); } catch
 		 * (Exception e) { //convert to fatal exception to avoid throws problems
-		 * throw new RuntimeException("Unable to read ant file"); }
+		 * throw new RuntimeException("Unable to read config file"); }
 		 */
 	}
 
 	// get values from properties
 	public void load(Properties props) {
-
 		if (props == null)
 			return;
 		super.load(props);
@@ -64,7 +63,6 @@ public class MSVariables extends GPVariables {
 	// get values from a stream
 	protected void load(DataInputStream is) throws ClassNotFoundException,
 			IOException, InstantiationException, IllegalAccessException {
-
 		super.load(is);
 		WorldHorizontal = is.readInt();
 		WorldVertical = is.readInt();
@@ -84,7 +82,6 @@ public class MSVariables extends GPVariables {
 
 	// write values to a text file
 	public void printOn(PrintStream os, GPVariables cfg) {
-
 		super.printOn(os, cfg);
 		os.println("WorldHorizontal           = " + WorldHorizontal);
 		os.println("WorldVertical             = " + WorldVertical);

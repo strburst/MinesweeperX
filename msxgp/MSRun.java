@@ -7,7 +7,7 @@ import gpjpp.*;
  */
 public class MSRun extends GPRun {
 
-    //must override GPRun.createVariables to return ant-specific variables
+    //must override GPRun.createVariables to return ms-specific variables
     protected GPVariables createVariables() {
         return new MSVariables();
     }

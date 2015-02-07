@@ -35,7 +35,7 @@ public class MSGP extends GP {
 		return GPObject.USERGPID;
 	}
 
-	// must override GP.createGene to create AntGene instances
+	// must override GP.createGene to create MSGene instances
 	public GPGene createGene(GPNode gpo) {
 		return new MSGene(gpo);
 	}
@@ -44,15 +44,12 @@ public class MSGP extends GP {
 
 	// must override GP.evaluate to return standard fitness
 	public double evaluate(GPVariables cfg) {
-		// System.out.println("evaluate" + cfg);
 		MSVariables mcfg = (MSVariables) cfg;
 		gridNum++;
 
-		// create ant first time through
+		// create grid first time through
 		if (mcfg.ms == null) {
 			mcfg.createMS();
-			// mcfg.ms.Grid.revealAll();
-			// System.out.println(mcfg.ms.Grid);
 		}
 
 		double stdF = 0;
@@ -60,30 +57,16 @@ public class MSGP extends GP {
 		for (int i = 0; i < mcfg.TrialsPerIndiv; i++) {
 			// prepare ms for moving
 			mcfg.ms.reset();
-			// System.out.println("JK");
 			// System.out.println("Count: "+ mcfg.ms.stepCt);
-			// mcfg.ms.reveal((int)(Math.random()*mcfg.ms.getWidth()),
-			// (int)(Math.random()*mcfg.ms.getHeight()));
 
-			// System.out.println(mcfg.ms.isGameOver());
 			// evaluate result-producing branch while energy and food remain
-			// System.out.println(mcfg.ms.checkUnrevealed());
 			while (mcfg.ms.stepCt < 1000 && !mcfg.ms.Grid.isGameOver()
 					&& !mcfg.ms.Grid.checkWin()) {
-				// System.out.println(mcfg.ms.toString());
 				// System.out.printf("row: %d, col: %d\n", mcfg.ms.rowPos,
 				// mcfg.ms.colPos);
-				/*
-				 * try { Thread.sleep(1000); } catch (InterruptedException e) {
-				 * System.out.println("Interrupted."); };
-				 */
 				((MSGene) get(0)).evaluate(mcfg);
-				/*System.out.println(mcfg.ms.Grid);
-				System.out.println();*/
+				// System.out.println(mcfg.ms.Grid);
 			}
-			// System.out.println(mcfg.ms.checkUnrevealed());
-			// mcfg.ms.revealAll();
-			// System.out.println(mcfg.ms.Grid + "\n");
 			stdF += mcfg.ms.Grid.checkUnrevealed();
 			//System.out.println(mcfg.ms.Grid);
 			//System.out.println();
@@ -94,8 +77,6 @@ public class MSGP extends GP {
 			stdF += length() / 1000.0;
 
 		// return standard fitness
-		// System.out.println("Fitness: "+stdF+" Count: "+
-		// mcfg.ms.stepCt+" length :" + length());
 		return stdF / mcfg.TrialsPerIndiv;
 	}
 

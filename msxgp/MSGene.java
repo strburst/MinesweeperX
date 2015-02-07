@@ -33,7 +33,7 @@ public class MSGene extends GPGene {
 		return GPObject.USERGENEID;
 	}
 
-	// must override GPGene.createChild to create AntGene instances
+	// must override GPGene.createChild to create MSGene instances
 	public GPGene createChild(GPNode gpo) {
 		return new MSGene(gpo);
 	}
@@ -91,14 +91,6 @@ public class MSGene extends GPGene {
 			return ((MSGene) get(0)).evaluate(cfg)
 					+ ((MSGene) get(1)).evaluate(cfg)
 					+ ((MSGene) get(2)).evaluate(cfg);
-
-			/*
-			 * case MSIndiv.PROG4: //evaluate four children and return total
-			 * food eaten if (containerSize() != 4) throw new
-			 * RuntimeException("PROG4 doesn't have four arguments"); return
-			 * ((MSGene)get(0)).evaluate(cfg)+ ((MSGene)get(1)).evaluate(cfg)+
-			 * ((MSGene)get(2)).evaluate(cfg)+ ((MSGene)get(3)).evaluate(cfg);
-			 */
 
 		case MSIndiv.ZER:
 			return 0;

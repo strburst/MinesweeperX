@@ -13,13 +13,12 @@ public class MSPopulation extends GPPopulation {
     }
 
     //populations are not cloned in standard runs
-    //AntPopulation(AntPopulation gpo) { super(gpo); }
-    //protected Object clone() { return new AntPopulation(this); }
+    //MSPopulation(MSPopulation gpo) { super(gpo); }
+    //protected Object clone() { return new MSPopulation(this); }
 
     //ID routine required for streams
-    //?
     public byte isA() { return GPObject.USERPOPULATIONID; }
 
-    //must override GPPopulation.createGP to create AntGP instances
+    //must override GPPopulation.createGP to create MSGP instances
     public GP createGP(int numOfGenes) { return new MSGP(numOfGenes); }
 }
