@@ -46,9 +46,6 @@ public class MSRun extends GPRun {
         ns.putNode(new GPNode(MSIndiv.SIX, "six"));
         ns.putNode(new GPNode(MSIndiv.SEV, "sev"));
 
-        /*if (bigTest)
-            ns.putNode(new GPNode(AntIndiv.PROG4, "prog4", 4));*/
-
         return adfNs;
     }
 
@@ -64,12 +61,12 @@ public class MSRun extends GPRun {
 
     //main application function
     public static void main(String[] args) {
-
         String baseName; // Used to find config file, name output
-        if (args.length == 1)
+        if (args.length == 1) {
             baseName = args[0];
-        else
+        } else {
             baseName = "default";
+        }
 
         //construct the test case
         MSRun test = new MSRun(baseName);

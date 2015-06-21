@@ -57,40 +57,30 @@ public class MSGP extends GP {
 		for (int i = 0; i < mcfg.TrialsPerIndiv; i++) {
 			// prepare ms for moving
 			mcfg.ms.reset();
-			// System.out.println("Count: "+ mcfg.ms.stepCt);
 
 			// evaluate result-producing branch while energy and food remain
 			while (mcfg.ms.stepCt < 1000 && !mcfg.ms.Grid.isGameOver()
 					&& !mcfg.ms.Grid.checkWin()) {
-				// System.out.printf("row: %d, col: %d\n", mcfg.ms.rowPos,
-				// mcfg.ms.colPos);
 				((MSGene) get(0)).evaluate(mcfg);
-				// System.out.println(mcfg.ms.Grid);
 			}
 			stdF += mcfg.ms.Grid.checkUnrevealed();
-			//System.out.println(mcfg.ms.Grid);
-			//System.out.println();
 		}
 
-		if (cfg.ComplexityAffectsFitness)
+		if (cfg.ComplexityAffectsFitness) {
 			// add length into fitness to promote small trees
 			stdF += length() / 1000.0;
+        }
 
 		// return standard fitness
 		return stdF / mcfg.TrialsPerIndiv;
 	}
 
-	// optionally override GP.printOn to show ant-specific data
+    /** Overriding this prints data specific to this Minesweeper simulation. */
 	public void printOn(PrintStream os, GPVariables cfg) {
-
 		super.printOn(os, cfg);
 
-		// re-evaluate ant to get its trail array
 		evaluate(cfg);
 
-		// print ant-specific data
 		MSVariables mcfg = (MSVariables) cfg;
-
-		// mcfg.ms.printTrail(os);
 	}
 }

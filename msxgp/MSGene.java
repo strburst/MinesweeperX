@@ -39,79 +39,79 @@ public class MSGene extends GPGene {
 	}
 
 	public int evaluate(MSVariables cfg) {
+        cfg.ms.stepCt++;
 
-		cfg.ms.stepCt++;
+        switch (node.value()) {
+            case MSIndiv.MOV:
+                // move the cursor
+                cfg.ms.move(((MSGene) get(0)).evaluate(cfg));
+                return 0;
 
-		switch (node.value()) {
+            case MSIndiv.UNC:
+                // uncover cell at cursor
+                cfg.ms.Grid.reveal(cfg.ms.rowPos, cfg.ms.colPos);
+                return 0;
 
-		case MSIndiv.MOV:
-			// move the cursor
-			cfg.ms.move(((MSGene) get(0)).evaluate(cfg));
-			return 0;
+            case MSIndiv.MRK:
+                // flag cell at cursor
+                cfg.ms.Grid.flag(cfg.ms.rowPos, cfg.ms.colPos);
+                return 0;
 
-		case MSIndiv.UNC:
-			// uncover cell at cursor
-			cfg.ms.Grid.reveal(cfg.ms.rowPos, cfg.ms.colPos);
-			return 0;
+            case MSIndiv.UNMRK:
+                // unflag the cursor
+                cfg.ms.Grid.unflag(cfg.ms.rowPos, cfg.ms.colPos);
+                return 0;
 
-		case MSIndiv.MRK:
-			// flag cell at cursor
-			cfg.ms.Grid.flag(cfg.ms.rowPos, cfg.ms.colPos);
-			return 0;
+            case MSIndiv.NUM:
+                // return the number of mines around the cursor
+                cfg.ms.Grid.cell(cfg.ms.rowPos, cfg.ms.colPos).getAdjMines();
+                return 0;
 
-		case MSIndiv.UNMRK:
-			// unflag the cursor
-			cfg.ms.Grid.unflag(cfg.ms.rowPos, cfg.ms.colPos);
-			return 0;
+            case MSIndiv.IFCOV:
+                // if cursor is covered, do first branch, else second branch
+                if (!cfg.ms.Grid.cell(cfg.ms.rowPos, cfg.ms.colPos).isRevealed()) {
+                    return ((MSGene) get(0)).evaluate(cfg);
+                } else {
+                    return ((MSGene) get(1)).evaluate(cfg);
+                }
 
-		case MSIndiv.NUM:
-			// return the number of mines around the cursor
-			cfg.ms.Grid.cell(cfg.ms.rowPos, cfg.ms.colPos).getAdjMines();
-			return 0;
+            case MSIndiv.PROG2:
+                // evaluate two children
+                if (containerSize() != 2) {
+                    throw new RuntimeException("PROG2 doesn't have two arguments");
+                }
+                return ((MSGene) get(0)).evaluate(cfg)
+                    + ((MSGene) get(1)).evaluate(cfg);
 
-		case MSIndiv.IFCOV:
-			// if cursor is covered, do first branch, else second branch
-			if (!cfg.ms.Grid.cell(cfg.ms.rowPos, cfg.ms.colPos).isRevealed()) {
-				return ((MSGene) get(0)).evaluate(cfg);
-			} else {
-				return ((MSGene) get(1)).evaluate(cfg);
-			}
+            case MSIndiv.PROG3:
+                // evaluate three children
+                if (containerSize() != 3) {
+                    throw new RuntimeException("PROG3 doesn't have three arguments");
+                }
+                return ((MSGene) get(0)).evaluate(cfg)
+                    + ((MSGene) get(1)).evaluate(cfg)
+                    + ((MSGene) get(2)).evaluate(cfg);
 
-		case MSIndiv.PROG2:
-			// evaluate two children
-			if (containerSize() != 2)
-				throw new RuntimeException("PROG2 doesn't have two arguments");
-			return ((MSGene) get(0)).evaluate(cfg)
-					+ ((MSGene) get(1)).evaluate(cfg);
+            case MSIndiv.ZER:
+                return 0;
+            case MSIndiv.ONE:
+                return 1;
+            case MSIndiv.TWO:
+                return 2;
+            case MSIndiv.THR:
+                return 3;
+            case MSIndiv.FOU:
+                return 4;
+            case MSIndiv.FIV:
+                return 5;
+            case MSIndiv.SIX:
+                return 6;
+            case MSIndiv.SEV:
+                return 7;
 
-		case MSIndiv.PROG3:
-			// evaluate three children
-			if (containerSize() != 3)
-				throw new RuntimeException("PROG3 doesn't have three arguments");
-			return ((MSGene) get(0)).evaluate(cfg)
-					+ ((MSGene) get(1)).evaluate(cfg)
-					+ ((MSGene) get(2)).evaluate(cfg);
-
-		case MSIndiv.ZER:
-			return 0;
-		case MSIndiv.ONE:
-			return 1;
-		case MSIndiv.TWO:
-			return 2;
-		case MSIndiv.THR:
-			return 3;
-		case MSIndiv.FOU:
-			return 4;
-		case MSIndiv.FIV:
-			return 5;
-		case MSIndiv.SIX:
-			return 6;
-		case MSIndiv.SEV:
-			return 7;
-
-		default:
-			throw new RuntimeException("Undefined function type "
-					+ node.value());
-		}
-	}
+            default:
+                throw new RuntimeException("Undefined function type "
+                        + node.value());
+        }
+    }
 }
